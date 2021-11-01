@@ -1,0 +1,22 @@
+name: "OnlyFriday"
+version: "1.0.0"
+api-version: "1.17"
+main: org.toastbrot.mc.onlyfriday.Plugin
+commands:
+  toggleFriday:
+    description: Toggle if you can only join on Friday
+    usage: /<command>
+    permission: onlyFriday.selfToggleFriday
+    permission-message: You don't have <permission>
+  toggleOtherFriday:
+    descriptioN: Toggle if user can only join on Friday
+    usage: /<command> [player]
+    permission: onlyFriday.otherToggleFriday
+    permission-message: You don't have <permission>
+permissions:
+  onlyFriday.selfToggleFriday:
+    description: Allows you to toggle yourself
+    default: true
+  onlyFriday.otherToggleFriday:
+    description: Allows you to toggle others
+    default: op

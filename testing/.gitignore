@@ -1,0 +1,10 @@
+world/
+world_nether/
+world_the_end/
+logs/
+cache/
+.console_history
+
+usercache.json
+ops.json
+banned*
