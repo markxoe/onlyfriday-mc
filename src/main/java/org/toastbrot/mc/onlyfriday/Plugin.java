@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -65,13 +66,29 @@ public class Plugin extends JavaPlugin implements Listener {
     player.kickPlayer("It's not Friday!");
   }
 
+  @SuppressWarnings("deprecation")
   private String findUserIDByName(String name) {
+    Player onlinePlayer = this.getServer().getPlayer(name);
+    if (onlinePlayer != null) {
+      return onlinePlayer.getUniqueId().toString();
+    }
+
+    OfflinePlayer offlinePlayer = this.getServer().getOfflinePlayer(name);
+    if (offlinePlayer != null) {
+      return offlinePlayer.getUniqueId().toString();
+    }
+
+    if (!config.isSet("player")) {
+      return null;
+    }
+
     Set<String> playerIDs = config.getConfigurationSection("player").getKeys(false);
     for (String id : playerIDs) {
       if (config.getString("player." + id + ".username").equals(name)) {
         return id;
       }
     }
+
     return null;
   }
 
